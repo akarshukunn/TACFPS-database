@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="">
+    <div class="w-full flex py-10 px-10 items-center">
+
+        <div class="w-1/2 px-5 flex justify-center">
+            <img class="w-4/5 rounded-xl" src={{tournament.image}} />
+        </div>
+
+        <div class="w-1/2 flex flex-col px-5">
+            <h1 class="text-6xl font-anton mb-5">{{tournament.name}}</h1>
+            <p class="text-xl font-roboto"><span class="font-bold">Prize Pool: </span> {{tournament.prize}}</p>
+            
+            <p class="text-xl font-roboto"><span class="font-bold">Date: </span>{{tournament.date}}</p>
+            <p class="text-xl font-roboto"><span class="font-bold">Location: </span>{{tournament.location}}</p>
+            
+            
+        </div>
+
+    </div>
+
+    <div class="text-6xl font-anton px-10 mt-10 mx-10 text-indigo-500">
+        Participating Teams
+    </div>
+
+    <div class="w-full flex flex-wrap px-10">
+        {% for x in teams %}
+        <div class="w-64 group flex flex-col my-10 mx-10 bg-zinc-900 hover:scale-125 transition ease-in delay-100">
+            <a href={% url 'team' team_id=x.id %}>
+                <div class="w-full flex justify-center my-5">
+                    <img class="w-44" src={{x.image}} />
+                </div>
+
+                <div class="flex justify-between items-center my-3 px-5">
+                    <div class="flex flex-col">
+                        <h1 class="font-anton group-hover:text-indigo-500 transition ease-in delay-100">{{x.name}}</h1>
+                        <p class="font-roboto">{{x.established}}</p>
+                    </div>
+    
+                    <div class="">
+                        <i class="fa-solid fa-up-right-from-square text-xl group-hover:text-indigo-500 transition ease-in delay-100"></i>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="text-6xl px-10 font-anton mt-10 mx-10 text-indigo-500">
+        Matches Played
+    </div>
+
+    <div class="w-full flex px-10 flex-wrap p-10">
+        {% for x in matches %}
+            <div class="w-full flex mb-10">
+                <div class="match-container-left px-6 flex items-center justify-between border-r-8 w-1/2 mx-5 py-1 bg-zinc-900 border-solid border-slate-100 hover:border-indigo-500 border-l-10 group transition ease-in duration-100">
+                    <a class="flex justify-between w-full items-center" href={% url 'team' team_id=x.team_1.id %}>
+                    <div class="flex items-center font-anton">
+                        <div>
+                            <img class="w-12" src={{x.team_1.image}} />
+                        </div>
+                        <div class="ml-5 text-xl group-hover:text-indigo-500 transition ease-in delay-100">
+                            {{x.team_1.name}}
+                        </div>
+                    </div>
+
+                    <div class="font-anton">
+                        {% if x.team_1 == x.winning_team %}
+                        <span class="text-green-400 text-lg">W</span>
+                        {% else %}
+                        <span class="text-red-400 text-lg">L</span>
+                        {% endif %}
+                    </div>
+                    </a>
+                </div>
+
+                <div class="flex items-center bg-indigo-500 px-5 py-1 font-anton rounded-full">
+                    VS
+                </div>
+                
+                <div class="match-container-right px-6 flex items-center justify-between border-l-8 w-1/2 mx-5 py-1 bg-zinc-900 border-solid border-slate-100 hover:border-indigo-500 border-l-10 group transition ease-in duration-100 border-r-10">
+                    <a class="flex justify-between w-full items-center" href={% url 'team' team_id=x.team_2.id %}>
+                    <div class="font-anton">
+                        {% if x.team_2 == x.winning_team %}
+                        <span class="text-green-400 text-lg">W</span>
+                        {% else %}
+                        <span class="text-red-400 text-lg">L</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex items-center font-anton">
+                        <div class="mr-5 text-xl group-hover:text-indigo-500 transition ease-in delay-100">
+                            {{x.team_2.name}}
+                        </div>
+                        <div>
+                            <img class="w-12" src={{x.team_2.image}} />
+                        </div>
+                        
+                    </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="">
+    <div class="w-full flex py-10 px-10 items-center h-screen">
+
+        <div class="w-1/2 px-5 h-4/5 flex justify-center">
+            <img class="w-4/5 rounded-xl object-cover" src={{player.image}} />
+        </div>
+
+        <div class="w-1/2 flex flex-col px-5">
+            <h1 class="text-6xl font-anton mb-5">{{player.first_name}} <span class="text-indigo-500">"{{player.ign}}"</span> {{player.last_name}}</h1>
+            <p class="text-xl font-roboto"><span class="font-bold">DOB: </span> {{player.dob}}</p>
+            
+            <p class="text-xl font-roboto"><span class="font-bold">Game: </span> <a href="{% url 'game' game_id=player.game.id %}">{{player.game}}</a></p>
+            
+            
+            <p class="text-3xl mt-10 font-roboto font-bold">About:</p>
+            <p class="text-xl font-roboto">{{player.bio}}</p>
+            
+            <p class="text-3xl mt-10 font-roboto font-bold">Stats:</p>
+            <p class="text-xl font-roboto"><span class="font-bold">K/D: </span> {{player.player_stats.kd}}</p>
+            <p class="text-xl font-roboto"><span class="font-bold">Rating: </span> {{player.player_stats.rating}}/10</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Database</title>
+
+    <link rel='stylesheet' href={% static 'normalize.css' %} />
+    <link rel='stylesheet' href={% static 'styles.css' %} />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap');
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/2e0c59ed32.js" crossorigin="anonymous"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        roboto: 'roboto',
+                        anton: 'anton'
+                    },
+                    borderWidth: {
+                        '10': '5rem'
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+<body class="bg-slate-900 text-slate-100 overflow-x-hidden">
+
+    <nav class="w-screen py-5 px-5 bg-black/70 text-slate-100 flex justify-between items-center">
+        <div class="text-3xl font-anton hover:text-indigo-500 transition ease-in delay-100">
+            <a href="/">
+            Game Database
+            </a>
+        </div>
+        <div>
+            <ul class="flex font-roboto mr-10">
+                <li class="mx-3 text-slate-100 hover:underline transition ease-in delay-100">
+                    <a href={% url 'teams' %}>
+                    Teams
+                    </>
+                </li>
+                <li class="mx-3 text-slate-100 hover:underline transition ease-in delay-100">
+                    <a href={% url 'players' %}>
+                        Players
+                    </a>
+                </li>
+                <li class="mx-3 text-slate-100 hover:underline transition ease-in delay-100">
+                    <a href={% url 'tournaments' %}>
+                    Tournaments
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+    
+</body>
+</html>

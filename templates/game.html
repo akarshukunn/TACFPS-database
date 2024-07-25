@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div>
+    <div class="w-full flex py-10 px-10 items-center">
+
+        <div class="w-1/2 px-5 ">
+            <img class="w-full rounded-xl" src={{game.image}} />
+        </div>
+
+        <div class="w-1/2 px-5 flex flex-col h-full">
+            <h1 class="font-anton text-6xl text-indigo-500 mb-10">{{game.name}}</h1>
+            <p class="mt-2 text-lg font-roboto"><span class='font-bold'>Release date:</span> {{game.release}}</p>
+            <p class="mt-2 text-lg font-roboto"><span class='font-bold'>Total Players:</span> {{players|length}}</p>
+        </div>
+
+    </div>
+
+    <div class="text-6xl font-anton px-10 mt-10 mx-10 text-indigo-500">
+        {{game.name}} Players
+    </div>
+
+    <div class="px-10 flex flex-wrap">
+        {% for x in players %}
+        
+            <div class="w-64 group flex flex-col my-10 mx-10 bg-zinc-900 hover:scale-125 transition ease-in delay-100">
+                <a href={% url 'player' player_id=x.id %}>
+                    <div class="h-64 overflow-hidden">
+                        <img class="w-full h-full object-cover" src={{x.image}} />
+                    </div>
+
+                    <div class="flex justify-between items-center my-3 px-5">
+                        <div class="flex flex-col">
+                            <h1 class="font-anton group-hover:text-indigo-500 transition ease-in delay-100 text-xl">{{x.first_name}} {{x.last_name}}</h1>
+                            <p class="font-roboto">{{x.ign}}</p>
+                        </div>
+        
+                        <div class="">
+                            <i class="fa-solid fa-up-right-from-square text-xl group-hover:text-indigo-500 transition ease-in delay-100"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+    
+    <p>{{x.ign}}</p>
+    
+</div>
+
+{% endblock %}
